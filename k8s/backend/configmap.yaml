@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: logistics-api-config
+data:
+  spring.datasource.url: "jdbc:postgresql://postgres:5432/logistics"
+  app.jwt.expiration: "86400000"
+  logging.level.org.springframework.web: "INFO"
+  logging.level.com.logistics: "DEBUG"

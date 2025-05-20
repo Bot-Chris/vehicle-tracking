@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: logistics-api
+  labels:
+    app: logistics-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: logistics-api
+  template:
+    metadata:
+      labels:
+        app: logistics-api
+    spec:
+      containers:
+      - name: logistics-api
+        image: logistics-api:1.0.0
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:postgresql://postgres:5432/logistics" 
+        - name: SPRING_DATASOURCE_USERNAME
+          value: "postgres"
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: "password"
+        - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+          value: "update"

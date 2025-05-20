@@ -1,0 +1,28 @@
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+whitelistObjectNames:
+  - java.lang:type=Memory
+  - java.lang:type=MemoryPool,name=*
+  - java.lang:type=OperatingSystem
+  - java.lang:type=Runtime
+  - java.lang:type=GarbageCollector,name=*
+  - java.lang:type=Threading
+  - org.apache.cassandra.metrics:type=*
+  - kafka.server:type=*
+  - Catalina:type=ThreadPool,name=*
+  - org.springframework.*:name=*,type=*
+  - org.hibernate*:type=*
+  - tomcat.jdbc:type=*
+  
+rules:
+  - pattern: "org.springframework.(.+):name=(.+),type=(.+)"
+    name: "spring_$1_$2"
+    type: GAUGE
+    labels:
+      type: "$3"
+      
+  - pattern: "org.springframework.(.+):type=(.+),name=(.+)"
+    name: "spring_$1_$3"
+    type: GAUGE
+    labels:
+      type: "$2"
